@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Installs and configures Nginx web server
+
+# Update package list
+apt-get update -y
+
+# Install nginx
+apt-get install nginx -y
+
+# Create directories if they don't exist
+mkdir -p /var/www/html
+mkdir -p /usr/share/nginx/html
+
+# Create the content in both possible locations
+echo "Holberton School for the win!" > /var/www/html/index.nginx-debian.html
+echo "Holberton School for the win!" > /var/www/html/index.html
+echo "Holberton School for the win!" > /usr/share/nginx/html/index.html
+
+# Ensure nginx is running
+service nginx start

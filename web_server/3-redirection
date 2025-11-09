@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Installs Nginx and configures a 301 redirect
+
+# Update package list
+apt-get update -y
+
+# Install nginx
+apt-get install nginx -y
+
+# Create directories if they don't exist
+mkdir -p /var/www/html
+mkdir -p /usr/share/nginx/html
+
+# Create the content in both possible locations
+echo "Holberton School for the win!" > /var/www/html/index.nginx-debian.html
+echo "Holberton School for the win!" > /var/www/html/index.html
+echo "Holberton School for the win!" > /usr/share/nginx/html/index.html
+
+# Configure redirect using sed to add location block before the closing brace
+sed -i '/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}' /etc/nginx/sites-available/default
+
+# Restart nginx
+service nginx restart
