@@ -1,39 +1,8 @@
 #!/usr/bin/env bash
 # Installs and configures Nginx so it serves Holberton School at /
 
-# Update package list
-apt-get update -y
-
-# Install nginx
-apt-get install -y nginx
-
-# Create the web root directory
-mkdir -p /var/www/html
-
-# Write the required content
-echo "Holberton School" > /var/www/html/index.html
-
-# Ensure nginx is configured to serve from /var/www/html
-# This creates or updates the default site configuration
-cat > /etc/nginx/sites-available/default << 'EOF'
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    
-    root /var/www/html;
-    index index.html index.htm;
-    
-    server_name _;
-    
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}
-EOF
-
-# Enable and start nginx
-systemctl enable nginx
-systemctl restart nginx
-
-# Allow nginx through the firewall if ufw is active
-ufw allow 'Nginx HTTP' 2>/dev/null || true
+apt-get update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo 'Holberton School' > /var/www/html/index.html
+service nginx restart
