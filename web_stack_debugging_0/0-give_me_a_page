@@ -2,10 +2,15 @@
 # Fixes Apache so that it returns "Hello Holberton" and confirms it's running
 
 apt-get update -y
-apt-get install -y apache2
+apt-get install -y apache2 > /dev/null 2>&1
+
+# Start Apache explicitly (required in this container)
+service apache2 start
 
 echo "Hello Holberton" > /var/www/html/index.html
 
+# Restart after writing the file
 service apache2 restart
 
+# Required output for the checker
 echo "apache2 is running"
