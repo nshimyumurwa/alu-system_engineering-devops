@@ -1,20 +1,17 @@
 #!/usr/bin/env bash
-# Installs and configures Nginx web server
+# Installs and configures Nginx so it serves “Holberton School” at /
 
 # Update package list
 apt-get update -y
 
 # Install nginx
-apt-get install nginx -y
+apt-get install -y nginx
 
-# Create directories if they don't exist
+# Create the web root directory
 mkdir -p /var/www/html
-mkdir -p /usr/share/nginx/html
 
-# Create the content in both possible locations
-echo "Holberton School for the win!" > /var/www/html/index.nginx-debian.html
-echo "Holberton School for the win!" > /var/www/html/index.html
-echo "Holberton School for the win!" > /usr/share/nginx/html/index.html
+# Write the required content
+echo "Holberton School" > /var/www/html/index.html
 
-# Ensure nginx is running
-service nginx start
+# Restart nginx to load new content
+systemctl restart nginx
