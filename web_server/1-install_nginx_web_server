@@ -1,19 +1,7 @@
 #!/usr/bin/env bash
-# Installs Nginx and configures it to serve "Holberton School" at /
+# Installs and configures nginx to return "Holberton School for the win!"
 
-# Update package list
-apt-get update -y
-
-# Install Nginx
-apt-get install -y nginx
-
-# Create index.html with required content
-echo "Holberton School" > /var/www/html/index.html
-
-# Make sure Nginx is restarted using init.d (not systemctl)
-if [ -f /etc/init.d/nginx ]; then
-    /etc/init.d/nginx restart
-fi
-
-# Optional: remove default index.html if it exists (some Ubuntu versions)
-[ -f /var/www/html/index.nginx-debian.html ] && rm /var/www/html/index.nginx-debian.html
+sudo apt-get update -y
+sudo apt-get install -y nginx
+sudo sh -c 'echo "Holberton School for the win!" > /var/www/html/index.html'
+sudo service nginx restart
