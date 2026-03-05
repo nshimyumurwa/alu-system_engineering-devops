@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
+<<<<<<< HEAD
 # Installs and configures nginx to return "Holberton School for the win!"
 
 sudo apt-get update -y
 sudo apt-get install -y nginx
 sudo sh -c 'echo "Holberton School for the win!" > /var/www/html/index.html'
 sudo service nginx restart
+=======
+# Installs and configures Nginx so it serves Holberton School at /
+
+apt-get update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo 'Holberton School' > /var/www/html/index.html
+service nginx restart
+>>>>>>> 0ac040b37ea06556a50e6f2942217789bf1ce4f0
