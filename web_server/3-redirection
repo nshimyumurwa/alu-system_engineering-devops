@@ -1,31 +1,33 @@
 #!/usr/bin/env bash
-<<<<<<< HEAD
-# Configures nginx with a 301 redirect on /redirect_me
-apt-get update -y
-apt-get install -y nginx
-echo "Holberton School" > /var/www/html/index.html
-sed -i '/server_name _;/a \\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-=======
-# Installs Nginx and configures a 301 redirect
+# This script configures Nginx to redirect /redirect_me to another page with 301 status
 
-# Update package list
-apt-get update -y
+# Update package lists and install Nginx
+sudo apt update
+sudo apt install -y nginx
 
-# Install nginx
-apt-get install nginx -y
+# Configure Nginx to redirect /redirect_me
+sudo bash -c 'cat > /etc/nginx/sites-available/default << EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-# Create directories if they don't exist
-mkdir -p /var/www/html
-mkdir -p /usr/share/nginx/html
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
 
-# Create the content in both possible locations
-echo "Holberton School for the win!" > /var/www/html/index.nginx-debian.html
-echo "Holberton School for the win!" > /var/www/html/index.html
-echo "Holberton School for the win!" > /usr/share/nginx/html/index.html
+    server_name _;
 
-# Configure redirect using sed to add location block before the closing brace
-sed -i '/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}' /etc/nginx/sites-available/default
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
 
-# Restart nginx
->>>>>>> 0ac040b37ea06556a50e6f2942217789bf1ce4f0
-service nginx restart
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF'
+
+# Test Nginx configuration
+sudo nginx -t
+
+# Restart Nginx to apply changes
+sudo systemctl restart nginx
