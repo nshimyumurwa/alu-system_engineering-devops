@@ -1,35 +1,11 @@
 #!/usr/bin/env bash
-# Configures Nginx with a 301 redirect and a custom 404 page
-
+# Configures Nginx with a 301 redirect on /redirect_me
 apt-get update -y
 apt-get install -y nginx
 
-# Set the default page content
 echo "Holberton School" > /var/www/html/index.html
 
-# Create the custom 404 page
-echo "Ceci n'est pas une page" > /var/www/html/404.html
-
-# Write the full nginx config (avoids fragile sed)
-cat > /etc/nginx/sites-available/default << 'EOF'
-server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-
-        root /var/www/html;
-        index index.html index.htm index.nginx-debian.html;
-
-        server_name _;
-
-        location /redirect_me {
-                return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-        }
-
-        error_page 404 /404.html;
-        location = /404.html {
-                internal;
-        }
-}
-EOF
+# Add redirect rule inside the server block
+sed -i '/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}' /etc/nginx/sites-enabled/default
 
 service nginx restart

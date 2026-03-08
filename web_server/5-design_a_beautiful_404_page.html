@@ -1,1 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 - Ceci n'est pas une page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@300;400;600&display=swap');
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: #1a1a2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      color: #e0e0e0;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; transform: scale(1); }
+      to   { opacity: 1;   transform: scale(1.4); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      max-width: 700px;
+    }
+
+    .pipe-frame {
+      border: 3px solid #c8a96e;
+      border-radius: 4px;
+      padding: 3rem 2.5rem 2rem;
+      background: rgba(10, 10, 30, 0.75);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 60px rgba(200, 169, 110, 0.15), inset 0 0 30px rgba(200, 169, 110, 0.05);
+      position: relative;
+    }
+
+    .magritte-pipe {
+      width: 220px;
+      margin: 0 auto 1.5rem;
+      filter: drop-shadow(0 4px 24px rgba(200,169,110,0.3));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50%       { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    .error-code {
+      font-family: 'Special Elite', cursive;
+      font-size: 6rem;
+      color: #c8a96e;
+      line-height: 1;
+      letter-spacing: -2px;
+      text-shadow: 0 0 40px rgba(200, 169, 110, 0.4);
+    }
+
+    .subtitle {
+      font-family: 'Special Elite', cursive;
+      font-size: 1.1rem;
+      color: #a08050;
+      margin: 0.5rem 0 1.5rem;
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+
+    .divider {
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c8a96e, transparent);
+      margin: 1.2rem auto;
+    }
+
+    .message {
+      font-size: 1.05rem;
+      color: #b0b0c0;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .ceci {
+      font-family: 'Special Elite', cursive;
+      font-size: 1.3rem;
+      color: #e8c880;
+      margin: 1rem 0 1.5rem;
+      font-style: italic;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 2rem;
+      border: 2px solid #c8a96e;
+      border-radius: 2px;
+      color: #c8a96e;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: #c8a96e;
+      color: #1a1a2e;
+    }
+
+    .corner {
+      position: absolute;
+      width: 12px; height: 12px;
+      border-color: #c8a96e;
+      border-style: solid;
+    }
+    .tl { top: -3px; left: -3px; border-width: 3px 0 0 3px; }
+    .tr { top: -3px; right: -3px; border-width: 3px 3px 0 0; }
+    .bl { bottom: -3px; left: -3px; border-width: 0 0 3px 3px; }
+    .br { bottom: -3px; right: -3px; border-width: 0 3px 3px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Starfield -->
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <div class="pipe-frame">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+
+      <!-- SVG Magritte-style pipe -->
+      <svg class="magritte-pipe" viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
+        <!-- Pipe bowl -->
+        <rect x="20" y="10" width="70" height="70" rx="8" ry="8"
+              fill="#5c3d1e" stroke="#c8a96e" stroke-width="3"/>
+        <rect x="30" y="20" width="50" height="50" rx="4" ry="4"
+              fill="#3a2510"/>
+        <!-- Pipe stem -->
+        <path d="M90 65 Q130 65 160 85 L200 85 L200 95 L155 95 Q120 95 85 75 Z"
+              fill="#5c3d1e" stroke="#c8a96e" stroke-width="2"/>
+        <!-- Pipe opening -->
+        <ellipse cx="200" cy="90" rx="8" ry="6" fill="#3a2510" stroke="#c8a96e" stroke-width="2"/>
+        <!-- Smoke wisps -->
+        <path d="M55 10 Q45 -5 55 -18 Q65 -30 55 -42"
+              fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <path d="M65 8 Q75 -8 65 -22 Q55 -35 65 -48"
+              fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+      </svg>
+
+      <div class="error-code">404</div>
+      <div class="subtitle">Page not found</div>
+
+      <div class="divider"></div>
+
+      <p class="message">
+        You've wandered into the void — the page you seek does not exist,<br/>
+        much like the pipe that is not a pipe.
+      </p>
+
+      <div class="ceci">« Ceci n'est pas une page »</div>
+
+      <a class="back-btn" href="/">← Return to Reality</a>
+    </div>
+  </div>
+
+  <script>
+    // Generate starfield
+    const starsEl = document.getElementById('stars');
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement('div');
+      s.classList.add('star');
+      const size = Math.random() * 2.5 + 0.5;
+      s.style.cssText = `
+        width:${size}px; height:${size}px;
+        top:${Math.random()*100}%;
+        left:${Math.random()*100}%;
+        animation-delay:${Math.random()*3}s;
+        animation-duration:${2+Math.random()*3}s;
+      `;
+      starsEl.appendChild(s);
+    }
+  </script>
+</body>
+</html>
