@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Configures a new Ubuntu machine to have Nginx with a custom X-Served-By HTTP response header
+
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update -y
+apt-get install -y nginx
+
+HOSTNAME=$(hostname)
+
+printf 'add_header X-Served-By %s;\n' "$HOSTNAME" > /etc/nginx/conf.d/custom_header.conf
+
+nginx -t && service nginx restart
